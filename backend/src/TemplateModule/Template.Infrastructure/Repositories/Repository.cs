@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Template.Application.Repositories;
+using Template.Core.Specifications;
 using Template.Domain.Aggregate;
 using Template.Domain.Ids;
 using Template.Infrastructure.DbContexts;
+using Template.Infrastructure.Specifications;
 using Template.SharedKernel.Shared;
 
 namespace Template.Infrastructure.Repositories;
@@ -50,10 +53,19 @@ internal class Repository : IRepository
         throw new NotImplementedException();
     }
 
-    public async Task<Result<Librarian>> GetByPhoneNumber(string phone, CancellationToken cancellationToken = default)
+    private IQueryable<Librarian> ApplySpecification(
+        Specification<Librarian,LibrarianId> specification)
     {
-        throw new NotImplementedException();
+        return SpecificationEvaluator.GetQuery(
+            _context.Librarians,
+            specification);
     }
+
+    public async Task<Result<Librarian?>> GetByPhoneNumber(string phone, CancellationToken cancellationToken = default) =>
+        await ApplySpecification(new LibrarianGetByIdWithBooksSpecification(phone))
+            .FirstOrDefaultAsync(cancellationToken);
+
+    
 
     public Task<Result<LibrarianId>> Save(Librarian entity)
     {

@@ -15,7 +15,7 @@ namespace Template.Application.Repositories
         Task<Result<LibrarianId>> Delete(Librarian entity);
         Task<Result<LibrarianId>> Save(Librarian entity);
         Task<Result<Librarian>> GetById(LibrarianId id, CancellationToken cancellationToken = default);
-        Task<Result<Librarian>> GetByPhoneNumber(string phone, CancellationToken cancellationToken = default);
+        Task<Result<Librarian?>> GetByPhoneNumber(string phone, CancellationToken cancellationToken = default);
         Task<Result<Librarian>> GetByEmail(string email, CancellationToken cancellationToken = default);
         Task<Result<List<Librarian>>> Get(CancellationToken cancellationToken = default);
     }
