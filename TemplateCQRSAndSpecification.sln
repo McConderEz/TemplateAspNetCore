@@ -15,9 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{780DB9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TemplateModule", "TemplateModule", "{BA20D6F1-B754-4A10-B7A5-A9C8D37DDFEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.SharedKernel", "Template.SharedKernel\Template.SharedKernel.csproj", "{FB4729CE-32CC-42C6-8D7E-B15163E1DFA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.SharedKernel", "backend\src\Shared\Template.SharedKernel\Template.SharedKernel.csproj", "{FB4729CE-32CC-42C6-8D7E-B15163E1DFA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Core", "Template.Core\Template.Core.csproj", "{AB88BEFC-BEB7-49F5-8778-DD7385F3D30A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Core", "backend\src\Shared\Template.Core\Template.Core.csproj", "{AB88BEFC-BEB7-49F5-8778-DD7385F3D30A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
