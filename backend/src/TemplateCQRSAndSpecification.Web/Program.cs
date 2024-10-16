@@ -1,6 +1,11 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
+builder.Services.AddStackExchangeRedisCache(redisOptions =>
+{
+    string connection = builder.Configuration.GetConnectionString("Redis");
+    redisOptions.Configuration = connection;
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

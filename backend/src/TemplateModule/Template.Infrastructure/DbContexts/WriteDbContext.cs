@@ -9,7 +9,7 @@ using Template.Domain.Aggregate;
 
 namespace Template.Infrastructure.DbContexts
 {
-    internal class WriteDbContext : DbContext
+    public class WriteDbContext : DbContext
     {
         private readonly IConfiguration _configuration;
 

@@ -14,7 +14,7 @@ using Template.SharedKernel.Shared;
 
 namespace Template.Infrastructure.Repositories;
 
-internal class Repository : IRepository
+public class Repository : IRepository
 {
     private readonly WriteDbContext _context;
 
