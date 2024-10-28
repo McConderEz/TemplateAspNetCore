@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Template.Domain.DomainEvents;
 using Template.Domain.Entities;
 using Template.Domain.Ids;
 using Template.SharedKernel.Shared;
@@ -21,5 +22,15 @@ namespace Template.Domain.Aggregate
         public int YearsOfExperience { get; set; } 
         public bool IsFullTime { get; set; }
         public List<Book> Books { get; set; } = [];
+
+
+        public Result TakeBook(Guid bookId)
+        {
+            //TODO: Проверка что эта книга в учёте этого библиотекаря
+
+            AddDomainEvent(new BookTakenDomainEvent(Id.Id, bookId));
+
+            return Result.Success();
+        }
     }
 }

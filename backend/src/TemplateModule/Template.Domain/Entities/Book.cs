@@ -18,5 +18,12 @@ namespace Template.Domain.Entities
         public bool IsAvailable { get; set; }        
         public string Publisher { get; set; }       
 
+        public Result TakeBook()
+        {
+            IsAvailable = false;
+
+            return Result.Success();
+        }
+
     }
 }

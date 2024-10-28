@@ -1,0 +1,79 @@
+services:
+    postgres:
+        container_name: db_library
+        image: postgres:latest
+        restart: always
+        environment:
+            POSTGRES_DB: "readSphere"
+            POSTGRES_USER: "postgres"
+            POSTGRES_PASSWORD: "345890"
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        ports:
+            - "5435:5432"
+    pgadmin:
+        image: dpage/pgadmin4
+        environment:
+            - PGADMIN_DEFAULT_EMAIL=user@domain.com
+            - PGADMIN_DEFAULT_PASSWORD=12345
+        ports:
+            - "1489:80"
+        depends_on:
+            - postgres
+ 
+    seq:
+        image: datalust/seq:latest
+        container_name: library_seq
+        restart: always
+        environment:
+            - ACCEPT_EULA=Y
+        ports:
+            - 5346:5341
+            - 8082:80
+    minio:
+        container_name: library_minio
+        image: minio/minio
+        ports: 
+            - 9006:9000
+            - 9007:9001
+        volumes:
+            - minio-data:/data
+        command: server --console-address ":9001" /data
+        restart: always
+
+    redis:
+        image: redis:latest
+        container_name: library_redis
+        environment: 
+            - REDIS_PASSWORD=12345
+            - REDIS_USER=admin
+            - REDIS_USER_PASSWORD=12345
+        ports:
+            - "6380:6379"
+        volumes:
+            - ./redisdata:/data
+
+    rabbitmq:
+        image: "rabbitmq:3-management"
+        environment:
+            RABBITMQ_DEFAULT_USER: "rabbitmq"
+            RABBITMQ_DEFAULT_PASS: "rabbitmq"
+        ports:
+            - "15672:15672"
+            - "5672:5672"
+
+    templatecqrsandspecification.web:
+      image: ${DOCKER_REGISTRY-}templatecqrsandspecificationweb
+      build:
+        context: .
+        dockerfile: backend/src/TemplateCQRSAndSpecification.Web/Dockerfile
+      depends_on:
+            - postgres
+            - rabbitmq
+volumes:
+    postgres-data:
+    minio-data:
+    redis-data:
+
+
+    
